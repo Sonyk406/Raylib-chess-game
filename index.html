@@ -63,6 +63,34 @@
     </head>
     <body>
         <canvas class=emscripten id=canvas oncontextmenu=event.preventDefault() tabindex=-1></canvas>
+
+        <div id="debug" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            color: red;
+            background: white;
+            font: 16px monospace;
+            padding: 5px;
+        ">
+        </div>
+        
+        <script>
+        function updateDebug() {
+            const canvas = document.getElementById("canvas");
+        
+            document.getElementById("debug").innerText =
+                "canvas: " + canvas.clientWidth + " x " + canvas.clientHeight +
+                "\nbacking: " + canvas.width + " x " + canvas.height +
+                "\nwindow: " + window.innerWidth + " x " + window.innerHeight +
+                "\ndpr: " + window.devicePixelRatio;
+        }
+        
+        window.addEventListener("resize", updateDebug);
+        window.addEventListener("load", updateDebug);
+        </script>
+      
         <p id="output" />
         <script>
             var Module = {
