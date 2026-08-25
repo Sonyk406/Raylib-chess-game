@@ -1437,10 +1437,10 @@ int main(){
                 y *= (float)GetScreenHeight() / ORIGINAL_GAME_HEIGHT;
 
                 if(GetScreenHeight() > GetScreenWidth()){
-                    y *= dpr;
+                    y /= dpr;
                 }
                 else{
-                    y /= dpr;
+                    y *= dpr;
                 }
             #endif
 
