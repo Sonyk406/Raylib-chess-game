@@ -5,10 +5,6 @@
 #include <vector>
 #include <string>
 
-#if defined(PLATFORM_WEB)
-#include <emscripten/emscripten.h>
-#endif
-
 int squareSize = 100;
 int offsetX = 100;
 int offsetY = 100;
@@ -1430,20 +1426,6 @@ int main(){
             float x = mouse.x;
             float y = mouse.y;
 
-            #if defined(PLATFORM_WEB)
-                float dpr = EM_ASM_DOUBLE({return window.devicePixelRatio;});
-
-                x *= (float)GetScreenWidth() / ORIGINAL_GAME_WIDTH;
-                y *= (float)GetScreenHeight() / ORIGINAL_GAME_HEIGHT;
-
-                if(GetScreenHeight() > GetScreenWidth()){
-                    y /= dpr;
-                }
-                else{
-                    y *= dpr;
-                }
-            #endif
-
             if(checkCollisionRecRounded(x, y, game.resetButton.rec, game.resetButton.roundness, game.resetButton.lineThick)){
                 game.resetGame();
             }
@@ -1587,7 +1569,7 @@ int main(){
         if(game.shake){
             game.screenShake();
         }
-
+        
         EndMode2D();
 
         EndDrawing();
